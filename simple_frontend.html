@@ -1,0 +1,2156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Research Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #a78bfa, #60a5fa, #34d399);
+            border-radius: 2px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .header-subtitle {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .search-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+            padding: 36px;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 20px 24px;
+            border: 2px solid rgba(226, 232, 240, 0.8);
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            background: rgba(248, 250, 252, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .search-controls {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            letter-spacing: 0.5px;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .search-btn:active {
+            transform: translateY(0);
+        }
+        
+        .source-filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .source-filter {
+            padding: 12px 20px;
+            border: 2px solid rgba(226, 232, 240, 0.8);
+            border-radius: 12px;
+            background: rgba(248, 250, 252, 0.8);
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .source-filter:hover {
+            border-color: #a78bfa;
+            background: rgba(167, 139, 250, 0.1);
+            color: #6d28d9;
+        }
+        
+        .source-filter.active {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            color: white;
+            border-color: #a78bfa;
+            box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3);
+        }
+        
+        .results-section {
+            margin-top: 40px;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(226, 232, 240, 0.6);
+        }
+        
+        .results-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .results-title::before {
+            content: '📊';
+            font-size: 1.2rem;
+        }
+        
+        .results-count {
+            color: #64748b;
+            font-size: 1rem;
+            font-weight: 500;
+            background: rgba(248, 250, 252, 0.8);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        
+        .paper-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 28px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .paper-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: rgba(167, 139, 250, 0.4);
+        }
+        
+        .paper-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #a78bfa, #60a5fa, #34d399);
+        }
+        
+        .paper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .paper-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .paper-title:hover {
+            color: #667eea;
+        }
+        
+        .paper-source {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+        
+        .paper-authors {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .paper-authors i {
+            margin-right: 8px;
+            color: #a78bfa;
+        }
+        
+        .paper-meta {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            color: #64748b;
+            flex-wrap: wrap;
+        }
+        
+        .paper-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(248, 250, 252, 0.8);
+            padding: 6px 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+        }
+        
+        .paper-meta-item i {
+            color: #a78bfa;
+        }
+        
+        .paper-abstract {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            background: rgba(248, 250, 252, 0.6);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #a78bfa;
+        }
+        
+        .paper-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .paper-action {
+            padding: 10px 18px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(248, 250, 252, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .paper-action:hover {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            color: white;
+            border-color: #a78bfa;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(167, 139, 250, 0.3);
+        }
+        
+        .paper-action.bookmarked {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            color: white;
+            border-color: #34d399;
+        }
+        
+        .paper-action.bookmarked:hover {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-color: #10b981;
+        }
+        
+        .paper-action i {
+            font-size: 0.8rem;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 80px 20px;
+            color: #64748b;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(226, 232, 240, 0.8);
+            border-top: 4px solid #a78bfa;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error {
+            background: linear-gradient(135deg, rgba(254, 242, 242, 0.95) 0%, rgba(253, 230, 230, 0.95) 100%);
+            color: #dc2626;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(254, 202, 202, 0.8);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .error i {
+            font-size: 1.2rem;
+            color: #ef4444;
+        }
+        
+        .health-status {
+            background: #d1fae5;
+            color: #059669;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid #86efac;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .health-status i {
+            font-size: 1.2rem;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            color: #64748b;
+        }
+        
+        .no-results i {
+            font-size: 4rem;
+            color: #cbd5e1;
+            margin-bottom: 24px;
+        }
+        
+        .no-results h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: #374151;
+            font-weight: 600;
+        }
+        
+        .no-results p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .search-suggestions {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+            padding: 24px;
+            border-radius: 16px;
+            margin-top: 24px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-suggestions h4 {
+            margin-bottom: 16px;
+            color: #374151;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .suggestion-tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .suggestion-tag {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .suggestion-tag:hover {
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            color: white;
+            border-color: #a78bfa;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(167, 139, 250, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .search-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .source-filters {
+                justify-content: center;
+            }
+        }
+
+        .project-overview {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+            padding: 32px;
+            border-radius: 20px;
+            margin-bottom: 36px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .project-overview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #a78bfa, #60a5fa, #34d399);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .project-overview h3 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .project-overview h3::before {
+            content: '🔬';
+            font-size: 1.2rem;
+        }
+
+        .project-overview p {
+            color: #475569;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-overview h4 {
+            font-size: 1.1rem;
+            color: #374151;
+            margin: 20px 0 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-overview h4::before {
+            content: '💡';
+            font-size: 1rem;
+        }
+
+        .project-overview ul {
+            list-style: none;
+            padding-left: 0;
+            color: #475569;
+        }
+
+        .project-overview li {
+            margin-bottom: 8px;
+            padding-left: 24px;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .project-overview li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            font-size: 0.9rem;
+        }
+
+        .tip-section {
+            background: rgba(52, 211, 153, 0.05);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tip-section i {
+            color: #059669;
+            margin-right: 8px;
+        }
+
+        /* New styles for tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .nav-tab {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 12px 12px 0 0;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4b5563;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            background: #e5e7eb;
+            border-color: #d1d5db;
+        }
+
+        .nav-tab.active {
+            background: #fff;
+            border-bottom: 2px solid #667eea;
+            color: #667eea;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .chat-section {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+            padding: 36px;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(226, 232, 240, 0.6);
+        }
+
+        .chat-title {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .chat-model {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .chat-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .chat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .chat-btn:active {
+            transform: translateY(0);
+        }
+
+        .chat-btn.secondary {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            color: #4b5563;
+            box-shadow: none;
+        }
+
+        .chat-btn.secondary:hover {
+            background: #e5e7eb;
+            border-color: #d1d5db;
+        }
+
+        .chat-messages {
+            height: 400px; /* Fixed height for chat messages */
+            overflow-y: auto;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            background: #f9fafb;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-message {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+
+        .chat-message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .chat-message.bot .message-avatar {
+            background: #34d399;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .chat-message.user .message-content {
+            background: #e0f2fe;
+            border: 1px solid #a7d7ff;
+        }
+
+        .chat-message.bot .message-content {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .message-sender {
+            font-weight: 600;
+        }
+
+        .message-time {
+            font-weight: 400;
+        }
+
+        .message-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #374151;
+        }
+        
+        .message-text strong {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .message-text ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .message-text li {
+            margin: 5px 0;
+        }
+        
+        .message-text h3 {
+            color: #1f2937;
+            margin: 15px 0 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .message-text h4 {
+            color: #374151;
+            margin: 12px 0 8px 0;
+            font-size: 1rem;
+        }
+        
+        .message-text p {
+            margin: 8px 0;
+        }
+        
+        .message-text code {
+            background: #f3f4f6;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #f9fafb;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-input-wrapper {
+            flex-grow: 1;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #374151;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .chat-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .chat-send-btn:active {
+            transform: translateY(0);
+        }
+
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #f3f4f6;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-suggestion {
+            background: #e5e7eb;
+            padding: 8px 14px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            color: #4b5563;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #d1d5db;
+        }
+
+        .chat-suggestion:hover {
+            background: #d1d5db;
+            border-color: #c6cbd1;
+        }
+
+        .bookmarks-section {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+            padding: 36px;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(226, 232, 240, 0.6);
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header h2::before {
+            content: '📚';
+            font-size: 1.2rem;
+        }
+
+        .section-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .section-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.2);
+        }
+
+        .section-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .section-btn:active {
+            transform: translateY(0);
+        }
+
+        .section-btn.secondary {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            color: #4b5563;
+            box-shadow: none;
+        }
+
+        .section-btn.secondary:hover {
+            background: #e5e7eb;
+            border-color: #d1d5db;
+        }
+
+        .bookmarks-list {
+            height: 400px; /* Fixed height for bookmarks list */
+            overflow-y: auto;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #f9fafb;
+            backdrop-filter: blur(10px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #64748b;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #cbd5e1;
+            margin-bottom: 24px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .history-section {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+            padding: 36px;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .history-list {
+            height: 400px; /* Fixed height for history list */
+            overflow-y: auto;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #f9fafb;
+            backdrop-filter: blur(10px);
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-item:hover {
+            background-color: #f0f2f5;
+        }
+
+        .history-item .query {
+            font-weight: 600;
+            color: #374151;
+            font-size: 1rem;
+        }
+
+        .history-item .date {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .history-item .source {
+            font-size: 0.8rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .history-item .source::before {
+            content: '(';
+        }
+
+        .history-item .source::after {
+            content: ')';
+        }
+
+        .history-item .source.arxiv::before { content: 'ArXiv'; }
+        .history-item .source.pubmed::before { content: 'PubMed'; }
+        .history-item .source.google_scholar::before { content: 'Scholar'; }
+        
+        /* Typing indicator styles */
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            padding: 8px 0;
+        }
+        
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #94a3b8;
+            animation: typing 1.4s infinite both;
+        }
+        
+        .typing-dots span:nth-child(1) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(2) { animation-delay: 0.4s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+        
+        .typing-indicator .message-time {
+            font-style: italic;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-microscope"></i> Academic Research Assistant</h1>
+            <p>Discover, analyze, and manage academic research papers with AI-powered insights</p>
+            <div class="header-subtitle">Empowering researchers with intelligent paper discovery and analysis</div>
+        </div>
+        
+        <div id="project-overview" class="project-overview">
+            <h3>About This Research Platform</h3>
+            <p>This intelligent research assistant combines the power of multiple academic databases with advanced AI capabilities to streamline your research process. Search across ArXiv, PubMed, and Google Scholar simultaneously, generate AI-powered summaries, and manage your research workflow with modern tools designed for academics, students, and professionals.</p>
+            
+            <h4>🔍 Core Research Features</h4>
+            <ul>
+                <li>Multi-source search across ArXiv, PubMed, and Google Scholar</li>
+                <li>AI-powered paper summarization using state-of-the-art models</li>
+                <li>Citation generation in 9 academic formats (APA, MLA, Chicago, etc.)</li>
+                <li>Semantic search with relevance scoring and ranking</li>
+                <li>Vector database storage for fast retrieval</li>
+            </ul>
+            
+            <h4>🤖 Enhanced AI Chat with Gemma</h4>
+            <ul>
+                <li>FREE Gemma-3n-e4b-it model for unlimited conversations</li>
+                <li>Markdown-formatted responses with rich typography</li>
+                <li>Context-aware explanations combining paper content + AI knowledge</li>
+                <li>Educational approach - explains concepts clearly with examples</li>
+                <li>Smart question understanding and off-topic rejection</li>
+            </ul>
+            
+            <h4>📚 Productivity Features</h4>
+            <ul>
+                <li>Bookmarking: Save papers for later reference</li>
+                <li>Search History: Track and repeat previous searches</li>
+                <li>Export Conversations: Download chat sessions as JSON</li>
+                <li>Mobile-Responsive: Works seamlessly on all devices</li>
+            </ul>
+            
+            <div class="tip-section">
+                <i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Use the AI chat to ask questions about your research papers, bookmark interesting papers, and export your research sessions for later reference.
+            </div>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('search')">
+                <i class="fas fa-search"></i> Search Papers
+            </button>
+            <button class="nav-tab" onclick="switchTab('chat')">
+                <i class="fas fa-robot"></i> AI Chat
+            </button>
+            <button class="nav-tab" onclick="switchTab('bookmarks')">
+                <i class="fas fa-bookmark"></i> Bookmarks
+            </button>
+            <button class="nav-tab" onclick="switchTab('history')">
+                <i class="fas fa-history"></i> History
+            </button>
+        </div>
+        
+        <!-- Search Section -->
+        <div id="search-tab" class="tab-content active">
+            <div class="search-section">
+                <div class="search-container">
+                    <input type="text" id="searchQuery" class="search-box" placeholder="Enter your search query (e.g., 'quantum computing', 'machine learning', 'neural networks')">
+                </div>
+                <div class="search-controls">
+                    <button onclick="searchPapers()" class="search-btn">
+                        <i class="fas fa-search"></i> Search Papers
+                    </button>
+                    <div class="source-filters">
+                        <div class="source-filter active" data-source="arxiv">
+                            <i class="fas fa-atom"></i> ArXiv
+                        </div>
+                        <div class="source-filter active" data-source="pubmed">
+                            <i class="fas fa-dna"></i> PubMed
+                        </div>
+                        <div class="source-filter" data-source="google_scholar">
+                            <i class="fas fa-graduation-cap"></i> Scholar
+                        </div>
+                    </div>
+                    <div class="tip-section">
+                        <i class="fas fa-info-circle"></i> Tip: For best results, use ArXiv and PubMed. Google Scholar may timeout due to blocking.
+                    </div>
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px;">
+                        <input type="checkbox" id="useExternalOnly" style="cursor: pointer;">
+                        Use external APIs only (slower, more up-to-date)
+                    </label>
+                </div>
+                
+                <div class="search-suggestions">
+                    <h4><i class="fas fa-lightbulb"></i> Try these popular topics:</h4>
+                    <div class="suggestion-tags">
+                        <div class="suggestion-tag" onclick="searchSuggestion('quantum computing')">Quantum Computing</div>
+                        <div class="suggestion-tag" onclick="searchSuggestion('machine learning')">Machine Learning</div>
+                        <div class="suggestion-tag" onclick="searchSuggestion('neural networks')">Neural Networks</div>
+                        <div class="suggestion-tag" onclick="searchSuggestion('artificial intelligence')">AI</div>
+                        <div class="suggestion-tag" onclick="searchSuggestion('deep learning')">Deep Learning</div>
+                        <div class="suggestion-tag" onclick="searchSuggestion('computer vision')">Computer Vision</div>
+                        <div class="suggestion-tag" onclick="searchSuggestion('natural language processing')">NLP</div>
+                        <div class="suggestion-tag" onclick="searchSuggestion('blockchain')">Blockchain</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="results" class="results-section"></div>
+        </div>
+        
+        <!-- AI Chat Section -->
+        <div id="chat-tab" class="tab-content">
+            <div class="chat-section">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <i class="fas fa-robot"></i> AI Research Assistant
+                        <span class="chat-model">Powered by Gemma-3n-e4b-it</span>
+                    </div>
+                    <div class="chat-controls">
+                        <button onclick="clearChat()" class="chat-btn secondary">
+                            <i class="fas fa-trash"></i> Clear Chat
+                        </button>
+                        <button onclick="exportChat()" class="chat-btn">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message bot">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-sender">AI Assistant</span>
+                                <span class="message-time">Just now</span>
+                            </div>
+                            <div class="message-text">
+                                👋 Hello! I'm your AI research assistant powered by Gemma. I can help you:
+                                <br>• Explain complex research concepts
+                                <br>• Analyze paper content and methodology
+                                <br>• Suggest research directions
+                                <br>• Answer questions about your findings
+                                <br><br>Ask me anything about your research!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="Ask me about your research papers, concepts, or methodology...">
+                        <button onclick="sendMessage()" class="chat-send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="chat-suggestions">
+                        <div class="chat-suggestion" onclick="sendSuggestion('Explain quantum entanglement in simple terms')">
+                            Explain quantum entanglement in simple terms
+                        </div>
+                        <div class="chat-suggestion" onclick="sendSuggestion('What are the latest trends in machine learning?')">
+                            What are the latest trends in ML?
+                        </div>
+                        <div class="chat-suggestion" onclick="sendSuggestion('Help me understand this paper methodology')">
+                            Help me understand paper methodology
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bookmarks Section -->
+        <div id="bookmarks-tab" class="tab-content">
+            <div class="bookmarks-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-bookmark"></i> Bookmarked Papers</h2>
+                    <div class="section-controls">
+                        <button onclick="clearBookmarks()" class="section-btn secondary">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                        <button onclick="exportBookmarks()" class="section-btn">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+                <div id="bookmarksList" class="bookmarks-list">
+                    <div class="empty-state">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>No bookmarks yet</h3>
+                        <p>Start bookmarking papers from your search results to access them quickly later.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- History Section -->
+        <div id="history-tab" class="tab-content">
+            <div class="history-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-history"></i> Search History</h2>
+                    <div class="section-controls">
+                        <button onclick="clearHistory()" class="section-btn secondary">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                        <button onclick="exportHistory()" class="section-btn">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+                <div id="historyList" class="history-list">
+                    <div class="empty-state">
+                        <i class="fas fa-history"></i>
+                        <h3>No search history yet</h3>
+                        <p>Your search queries will appear here for quick access and repetition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        let selectedSources = ['arxiv', 'pubmed']; // Default to working sources only
+        let bookmarkedPapers = JSON.parse(localStorage.getItem('bookmarkedPapers') || '[]');
+        let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+        let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+
+        // Check API health on page load
+        window.onload = function() {
+            initializeSourceFilters();
+            loadBookmarks();
+            loadHistory();
+            loadChatHistory();
+        };
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Chat functionality
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            addChatMessage(message, 'user');
+            input.value = '';
+            
+            // Show typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'chat-message bot typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-sender">AI Assistant</span>
+                        <span class="message-time">typing...</span>
+                    </div>
+                    <div class="message-text">
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.appendChild(typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Try API call first, fallback to enhanced local responses
+            fetch('http://localhost:8000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                    context: '',
+                    max_length: 500
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Remove typing indicator
+                typingIndicator.remove();
+                
+                if (data.success && data.data && data.data.response) {
+                    addChatMessage(data.data.response, 'bot');
+                } else {
+                    // Fallback to enhanced local response
+                    const response = generateEnhancedAIResponse(message);
+                    addChatMessage(response, 'bot');
+                }
+            })
+            .catch(error => {
+                console.error('Chat error:', error);
+                // Remove typing indicator and use enhanced local response
+                typingIndicator.remove();
+                const response = generateEnhancedAIResponse(message);
+                addChatMessage(response, 'bot');
+            });
+        }
+
+        function generateEnhancedAIResponse(message) {
+            const message_lower = message.toLowerCase();
+            
+            // Enhanced responses based on message content
+            if (message_lower.includes('quantum') || message_lower.includes('physics') || message_lower.includes('particle')) {
+                return `**Quantum Physics Overview** 🔬\n\nQuantum physics deals with the behavior of matter and energy at the atomic and subatomic scale. Key principles include:\n\n• **Wave-particle duality**: Particles exhibit both wave and particle properties\n• **Uncertainty principle**: Cannot simultaneously know exact position and momentum\n• **Quantum entanglement**: Particles become correlated in ways that classical physics cannot explain\n• **Superposition**: Particles can exist in multiple states simultaneously\n\n**Applications**: Quantum computing, cryptography, sensing, and communication technologies.\n\nWould you like me to explain any specific quantum concept in more detail?`;
+            }
+            
+            if (message_lower.includes('machine learning') || message_lower.includes('ai') || message_lower.includes('neural') || message_lower.includes('deep learning')) {
+                return `**Machine Learning & AI** 🤖\n\nMachine learning enables computers to learn from data without explicit programming. Here's a breakdown:\n\n**Main Types:**\n• **Supervised Learning**: Uses labeled data (classification, regression)\n• **Unsupervised Learning**: Finds patterns in unlabeled data (clustering, dimensionality reduction)\n• **Reinforcement Learning**: Learns through rewards and punishments\n\n**Neural Networks**: The backbone of deep learning, inspired by biological neural networks.\n\n**Common Applications**: Computer vision, natural language processing, recommendation systems, autonomous vehicles.\n\nWhat specific ML aspect would you like to explore further?`;
+            }
+            
+            if (message_lower.includes('research') || message_lower.includes('methodology') || message_lower.includes('study')) {
+                return `**Research Methodology Guide** 📚\n\nEffective research methodology is crucial for valid scientific studies:\n\n**1. Research Design**\n• Define clear research questions and hypotheses\n• Choose appropriate study design (experimental, observational, etc.)\n\n**2. Data Collection**\n• Quantitative methods: Surveys, experiments, measurements\n• Qualitative methods: Interviews, observations, case studies\n• Mixed methods: Combining both approaches\n\n**3. Analysis & Interpretation**\n• Statistical analysis for quantitative data\n• Thematic analysis for qualitative data\n• Draw valid conclusions within study limitations\n\n**4. Validation**\n• Peer review, replication studies, triangulation\n\nWhat specific research area or methodology question do you have?`;
+            }
+            
+            if (message_lower.includes('citation') || message_lower.includes('reference') || message_lower.includes('bibliography')) {
+                return `**Academic Citation Guide** 📖\n\nProper citation is essential for academic integrity:\n\n**Common Citation Styles:**\n• **APA**: Psychology, social sciences (Author-Date format)\n• **MLA**: Literature, humanities (Author-Page format)\n• **Chicago**: History, literature (Notes-Bibliography or Author-Date)\n• **IEEE**: Engineering, computer science (Numbered format)\n• **Vancouver**: Medicine, life sciences (Numbered format)\n\n**This System Supports**: 9 different citation formats with automatic generation!\n\n**Best Practices:**\n• Cite all sources of information\n• Include page numbers for direct quotes\n• Use consistent formatting throughout\n• Check institutional requirements\n\nWhat citation style are you working with?`;
+            }
+            
+            if (message_lower.includes('summary') || message_lower.includes('summarize') || message_lower.includes('abstract')) {
+                return `**Academic Summarization** 📝\n\nEffective summarization preserves key information while condensing content:\n\n**Types of Summaries:**\n• **Abstracts**: Structured summaries (background, methods, results, conclusions)\n• **Literature Reviews**: Synthesis of multiple sources\n• **Executive Summaries**: Key findings for decision-makers\n\n**This System's AI Summarization:**\n• Uses BART model for abstractive summarization\n• Extracts key findings and methodology\n• Maintains scientific accuracy\n• Configurable length and focus\n\n**Good Summary Structure:**\n1. Main research question/objective\n2. Methodology used\n3. Key findings/results\n4. Implications/conclusions\n\nWould you like me to summarize a specific paper for you?`;
+            }
+            
+            if (message_lower.includes('search') || message_lower.includes('find') || message_lower.includes('papers')) {
+                return `**Academic Search Guide** 🔍\n\nThis research assistant provides comprehensive search capabilities:\n\n**Available Databases:**\n• **ArXiv**: Preprints in physics, mathematics, computer science\n• **PubMed**: Biomedical and life sciences literature\n• **Google Scholar**: Broad academic search (may have limitations)\n\n**Search Features:**\n• **Semantic Search**: Finds relevant papers even without exact keyword matches\n• **Multi-source**: Search across all databases simultaneously\n• **Filters**: By date, category, author, publication type\n• **Relevance Ranking**: AI-powered result scoring\n\n**Search Tips:**\n• Use specific technical terms\n• Try alternative phrasings\n• Use author names for targeted searches\n• Combine multiple keywords\n\nReady to search for papers? Just use the search tab!`;
+            }
+            
+            if (message_lower.includes('help') || message_lower.includes('what can you do') || message_lower.includes('features')) {
+                return `**Welcome to Your AI Research Assistant!** 🎓\n\nI'm here to help with your academic research needs:\n\n**🔍 Core Features:**\n• **Multi-Database Search**: ArXiv, PubMed, Google Scholar\n• **AI Summarization**: Automatic paper summaries using BART\n• **Citation Generation**: 9 academic formats (APA, MLA, Chicago, etc.)\n• **Research Guidance**: Methodology, concepts, best practices\n• **Paper Management**: Bookmarking, history, export functions\n\n**🤖 AI Capabilities:**\n• Explain complex research concepts\n• Provide methodology guidance\n• Generate proper citations\n• Summarize research papers\n• Answer domain-specific questions\n\n**📚 Productivity Tools:**\n• Save papers to bookmarks\n• Track search history\n• Export conversations and data\n• Mobile-responsive interface\n\nWhat would you like to explore first?`;
+            }
+            
+            // Default response for other topics
+            return `**Research Assistant Response** 💭\n\nI understand you're asking about **"${message}"** - this is an interesting research topic!\n\nI can help you explore:\n• **Theoretical foundations** and core concepts\n• **Practical applications** and real-world uses\n• **Recent developments** and current trends\n• **Research methodologies** and study approaches\n• **Related papers** and academic resources\n\nTo provide more specific guidance, could you tell me:\n- Are you looking for background information or recent advances?\n- Is this for a specific project or general interest?\n- Do you need help with research design or literature review?\n\nI'm here to help make your research more efficient and insightful!`;
+        }
+
+        function sendSuggestion(suggestion) {
+            document.getElementById('chatInput').value = suggestion;
+            sendMessage();
+        }
+
+        function addChatMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageEl = document.createElement('div');
+            messageEl.className = `chat-message ${sender}`;
+            
+            const now = new Date().toLocaleTimeString();
+            
+            // Format message for display
+            const formattedMessage = sender === 'bot' ? formatBotMessage(message) : message;
+            
+            messageEl.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-${sender === 'user' ? 'user' : 'robot'}"></i>
+                </div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-sender">${sender === 'user' ? 'You' : 'AI Assistant'}</span>
+                        <span class="message-time">${now}</span>
+                    </div>
+                    <div class="message-text">${formattedMessage}</div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageEl);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Save to chat history
+            chatHistory.push({ message, sender, timestamp: new Date() });
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+        }
+        
+        function formatBotMessage(message) {
+            // Convert markdown-style formatting to HTML
+            let formatted = message
+                // Convert **text** to bold
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                // Convert bullet points (• text) to list items
+                .replace(/^• (.*$)/gm, '<li>$1</li>')
+                // Convert newlines to breaks
+                .replace(/\n/g, '<br>')
+                // Wrap consecutive list items in ul tags
+                .replace(/(<li>.*?<\/li>)(<br>)*(<li>.*?<\/li>)/g, '$1$3')
+                .replace(/(<li>.*?<\/li>)(<br>)*(<li>.*?<\/li>)/g, '$1$3')
+                .replace(/(<li>.*?<\/li>)(<br>)*(<li>.*?<\/li>)/g, '$1$3')
+                .replace(/(<li>.*?<\/li>)(<br>)*(<li>.*?<\/li>)/g, '$1$3');
+            
+            // Wrap all list items in ul tags
+            formatted = formatted.replace(/(<li>.*?<\/li>)/g, '<ul>$1</ul>');
+            
+            // Clean up multiple ul tags
+            formatted = formatted.replace(/<\/ul><br><ul>/g, '');
+            formatted = formatted.replace(/<\/ul><ul>/g, '');
+            
+            return formatted;
+        }
+
+        function generateAIResponse(message) {
+            // Simple AI response simulation (replace with actual Gemma API)
+            const responses = [
+                `I understand you're asking about "${message}". This is a fascinating topic in research. Let me explain the key concepts...`,
+                `Great question about "${message}"! Based on current research, here's what we know...`,
+                `That's an interesting point about "${message}". From an academic perspective, this relates to...`,
+                `I can help explain "${message}" in simple terms. The fundamental principle is...`
+            ];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function clearChat() {
+            document.getElementById('chatMessages').innerHTML = `
+                <div class="chat-message bot">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">AI Assistant</span>
+                            <span class="message-time">Just now</span>
+                        </div>
+                        <div class="message-text">
+                            👋 Hello! I'm your AI research assistant powered by Gemma. I can help you:
+                            <br>• Explain complex research concepts
+                            <br>• Analyze paper content and methodology
+                            <br>• Suggest research directions
+                            <br>• Answer questions about your findings
+                            <br><br>Ask me anything about your research!
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatHistory = [];
+            localStorage.removeItem('chatHistory');
+        }
+
+        function exportChat() {
+            const dataStr = JSON.stringify(chatHistory, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const exportFileDefaultName = `chat_history_${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // Bookmarking functionality
+        function bookmarkPaper(paperId) {
+            const paper = getCurrentPaper(paperId);
+            if (!paper) return;
+            
+            if (bookmarkedPapers.find(p => p.id === paperId)) {
+                alert('Paper already bookmarked!');
+                return;
+            }
+            
+            bookmarkedPapers.push({
+                ...paper,
+                bookmarked_at: new Date().toISOString()
+            });
+            
+            localStorage.setItem('bookmarkedPapers', JSON.stringify(bookmarkedPapers));
+            loadBookmarks();
+            alert('Paper bookmarked successfully!');
+        }
+
+        function removeBookmark(paperId) {
+            bookmarkedPapers = bookmarkedPapers.filter(p => p.id !== paperId);
+            localStorage.setItem('bookmarkedPapers', JSON.stringify(bookmarkedPapers));
+            loadBookmarks();
+        }
+
+        function loadBookmarks() {
+            const bookmarksList = document.getElementById('bookmarksList');
+            if (bookmarkedPapers.length === 0) {
+                bookmarksList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>No bookmarks yet</h3>
+                        <p>Start bookmarking papers from your search results to access them quickly later.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            bookmarksList.innerHTML = bookmarkedPapers.map(paper => `
+                <div class="paper-card">
+                    <div class="paper-header">
+                        <div>
+                            <div class="paper-title" onclick="openPaper('${paper.url}')">${paper.title}</div>
+                            <div class="paper-authors">
+                                <i class="fas fa-users"></i> ${paper.authors.map(a => a.name).join(', ')}
+                            </div>
+                        </div>
+                        <div class="paper-source">${paper.source.toUpperCase()}</div>
+                    </div>
+                    <div class="paper-meta">
+                        <div class="paper-meta-item">
+                            <i class="fas fa-calendar"></i> ${new Date(paper.publication_date).toLocaleDateString()}
+                        </div>
+                        <div class="paper-meta-item">
+                            <i class="fas fa-bookmark"></i> ${new Date(paper.bookmarked_at).toLocaleDateString()}
+                        </div>
+                    </div>
+                    <div class="paper-abstract">${paper.abstract}</div>
+                    <div class="paper-actions">
+                        <a href="${paper.url}" target="_blank" class="paper-action">
+                            <i class="fas fa-external-link-alt"></i> View Paper
+                        </a>
+                        <a href="#" onclick="removeBookmark('${paper.id}')" class="paper-action">
+                            <i class="fas fa-trash"></i> Remove
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearBookmarks() {
+            if (confirm('Are you sure you want to clear all bookmarks?')) {
+                bookmarkedPapers = [];
+                localStorage.removeItem('bookmarkedPapers');
+                loadBookmarks();
+            }
+        }
+
+        function exportBookmarks() {
+            const dataStr = JSON.stringify(bookmarkedPapers, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const exportFileDefaultName = `bookmarks_${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // Search history functionality
+        function addToHistory(query, sources) {
+            const historyItem = {
+                query: query,
+                sources: sources,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Remove duplicate if exists
+            searchHistory = searchHistory.filter(item => item.query !== query);
+            searchHistory.unshift(historyItem);
+            
+            // Keep only last 50 searches
+            if (searchHistory.length > 50) {
+                searchHistory = searchHistory.slice(0, 50);
+            }
+            
+            localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+            loadHistory();
+        }
+
+        function loadHistory() {
+            const historyList = document.getElementById('historyList');
+            if (searchHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-history"></i>
+                        <h3>No search history yet</h3>
+                        <p>Your search queries will appear here for quick access and repetition.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            historyList.innerHTML = searchHistory.map(item => `
+                <div class="history-item" onclick="repeatSearch('${item.query}', '${JSON.stringify(item.sources)}')">
+                    <div>
+                        <div class="query">${item.query}</div>
+                        <div class="source">${item.sources.join(', ')}</div>
+                    </div>
+                    <div class="date">${new Date(item.timestamp).toLocaleDateString()}</div>
+                </div>
+            `).join('');
+        }
+
+        function repeatSearch(query, sources) {
+            selectedSources = JSON.parse(sources);
+            document.getElementById('searchQuery').value = query;
+            switchTab('search');
+            updateSourceFilters();
+            searchPapers();
+        }
+
+        function updateSourceFilters() {
+            document.querySelectorAll('.source-filter').forEach(filter => {
+                const source = filter.dataset.source;
+                if (selectedSources.includes(source)) {
+                    filter.classList.add('active');
+                } else {
+                    filter.classList.remove('active');
+                }
+            });
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear search history?')) {
+                searchHistory = [];
+                localStorage.removeItem('searchHistory');
+                loadHistory();
+            }
+        }
+
+        function exportHistory() {
+            const dataStr = JSON.stringify(searchHistory, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const exportFileDefaultName = `search_history_${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        function loadChatHistory() {
+            if (chatHistory.length > 0) {
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.innerHTML = ''; // Clear default message
+                chatHistory.forEach(item => {
+                    addChatMessage(item.message, item.sender);
+                });
+            }
+        }
+
+        // Helper function to get current paper data
+        function getCurrentPaper(paperId) {
+            // Find paper in current search results
+            const paper = currentSearchResults.find(p => p.id === paperId);
+            if (paper) {
+                return paper;
+            }
+            
+            // If not found in search results, check bookmarks
+            const bookmarked = bookmarkedPapers.find(p => p.id === paperId);
+            if (bookmarked) {
+                return bookmarked;
+            }
+            
+            // Fallback - shouldn't happen in normal usage
+            return {
+                id: paperId,
+                title: 'Unknown Paper',
+                authors: [{name: 'Unknown Author'}],
+                abstract: 'Abstract not available',
+                source: 'unknown',
+                url: paperId,
+                publication_date: new Date().toISOString()
+            };
+        }
+
+        // Store current search results for bookmarking
+        let currentSearchResults = [];
+
+        function initializeSourceFilters() {
+            const filters = document.querySelectorAll('.source-filter');
+            filters.forEach(filter => {
+                const source = filter.dataset.source;
+                
+                // Set initial state - only ArXiv and PubMed active
+                if (selectedSources.includes(source)) {
+                    filter.classList.add('active');
+                } else {
+                    filter.classList.remove('active');
+                }
+                
+                filter.addEventListener('click', function() {
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        selectedSources = selectedSources.filter(s => s !== source);
+                    } else {
+                        this.classList.add('active');
+                        selectedSources.push(source);
+                    }
+                    
+                    // Ensure at least one source is selected
+                    if (selectedSources.length === 0) {
+                        this.classList.add('active');
+                        selectedSources.push(source);
+                    }
+                });
+            });
+        }
+
+        function searchSuggestion(query) {
+            document.getElementById('searchQuery').value = query;
+            searchPapers();
+        }
+
+        async function searchPapers() {
+            const query = document.getElementById('searchQuery').value;
+            if (!query.trim()) {
+                showError('Please enter a search query');
+                return;
+            }
+
+            // Add to search history
+            addToHistory(query, selectedSources);
+
+            // Show loading with source-specific messaging
+            const loadingMessage = getLoadingMessage();
+            document.getElementById('results').innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <div>Searching for papers...</div>
+                    <div style="font-size: 0.9rem; color: #9ca3af;">${loadingMessage}</div>
+                </div>
+            `;
+
+            try {
+                const useExternalOnly = document.getElementById('useExternalOnly').checked;
+                
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 45000); // 45 second timeout
+                
+                const response = await fetch('http://localhost:8000/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        max_results: 10,
+                        sources: selectedSources,
+                        use_local_db: !useExternalOnly,
+                        use_external_apis: true
+                    }),
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success && data.data.results && data.data.results.papers && data.data.results.papers.length > 0) {
+                    currentSearchResults = data.data.results.papers;
+                    displayResults(data.data.results.papers, query, data.data.results.search_time);
+                } else {
+                    showNoResults(query);
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                if (error.name === 'AbortError') {
+                    showTimeoutError();
+                } else {
+                    showError('Error searching papers: ' + (error.message || 'Network error. Please check if backend is running and try again.'));
+                }
+            }
+        }
+
+        function getLoadingMessage() {
+            const sourceMessages = {
+                'arxiv': 'ArXiv (fast & reliable)',
+                'pubmed': 'PubMed (reliable)',
+                'google_scholar': 'Google Scholar (may be slow or blocked)'
+            };
+            
+            const activeMessages = selectedSources.map(source => sourceMessages[source]).join(', ');
+            return `Scanning: ${activeMessages}`;
+        }
+
+        function showTimeoutError() {
+            const hasScholar = selectedSources.includes('google_scholar');
+            const errorMessage = hasScholar ? 
+                'Search timeout - Google Scholar may be blocked. Try searching with just ArXiv and PubMed (uncheck Google Scholar).' :
+                'Search timeout - please check your connection and try again.';
+            
+            document.getElementById('results').innerHTML = `
+                <div class="error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Search Timeout</strong><br>
+                        ${errorMessage}
+                        <br><br>
+                        <strong>Recommended sources:</strong> ArXiv (fastest), PubMed (reliable)
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayResults(papers, query, searchTime) {
+            let html = `
+                <div class="results-header">
+                    <div class="results-title">Search Results</div>
+                    <div class="results-count">${papers.length} papers found in ${searchTime?.toFixed(2) || 'N/A'}s</div>
+                </div>
+            `;
+            
+            papers.forEach(paper => {
+                const publishedDate = paper.publication_date ? new Date(paper.publication_date).toLocaleDateString() : 'Unknown';
+                const authors = paper.authors.map(a => a.name).join(', ');
+                const categories = paper.categories ? paper.categories.join(', ') : '';
+                const isBookmarked = bookmarkedPapers.find(p => p.id === paper.id);
+                
+                html += `
+                    <div class="paper-card">
+                        <div class="paper-header">
+                            <div>
+                                <div class="paper-title" onclick="openPaper('${paper.url}')">${paper.title}</div>
+                                <div class="paper-authors">
+                                    <i class="fas fa-users"></i> ${authors}
+                                </div>
+                            </div>
+                            <div class="paper-source">${paper.source.toUpperCase()}</div>
+                        </div>
+                        
+                        <div class="paper-meta">
+                            <div class="paper-meta-item">
+                                <i class="fas fa-calendar"></i> ${publishedDate}
+                            </div>
+                            ${categories ? `<div class="paper-meta-item">
+                                <i class="fas fa-tags"></i> ${categories}
+                            </div>` : ''}
+                            ${paper.relevance_score ? `<div class="paper-meta-item">
+                                <i class="fas fa-star"></i> Relevance: ${(paper.relevance_score * 100).toFixed(1)}%
+                            </div>` : ''}
+                        </div>
+                        
+                        <div class="paper-abstract">${paper.abstract}</div>
+                        
+                        <div class="paper-actions">
+                            ${paper.url ? `<a href="${paper.url}" target="_blank" class="paper-action">
+                                <i class="fas fa-external-link-alt"></i> View Paper
+                            </a>` : ''}
+                            ${paper.pdf_url ? `<a href="${paper.pdf_url}" target="_blank" class="paper-action">
+                                <i class="fas fa-file-pdf"></i> Download PDF
+                            </a>` : ''}
+                            <a href="#" onclick="getCitation('${paper.id}')" class="paper-action">
+                                <i class="fas fa-quote-right"></i> Get Citation
+                            </a>
+                            <a href="#" onclick="getSummary('${paper.id}')" class="paper-action">
+                                <i class="fas fa-compress-alt"></i> Summarize
+                            </a>
+                            <a href="#" onclick="findSimilar('${paper.title}')" class="paper-action">
+                                <i class="fas fa-search-plus"></i> Find Similar
+                            </a>
+                            <a href="#" onclick="bookmarkPaper('${paper.id}')" class="paper-action ${isBookmarked ? 'bookmarked' : ''}">
+                                <i class="fas fa-bookmark"></i> ${isBookmarked ? 'Bookmarked' : 'Bookmark'}
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('results').innerHTML = html;
+        }
+
+        function showNoResults(query) {
+            document.getElementById('results').innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <h3>No papers found</h3>
+                    <p>Sorry, we couldn't find any papers matching "${query}". Try different keywords or check the suggestions below.</p>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('results').innerHTML = `
+                <div class="error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>${message}</div>
+                </div>
+            `;
+        }
+
+        function openPaper(url) {
+            if (url) {
+                window.open(url, '_blank');
+            }
+        }
+
+        async function getCitation(paperId) {
+            try {
+                const response = await fetch(`http://localhost:8000/papers/${paperId}/citation?style=apa`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('Citation (APA): ' + data.data.citation);
+                } else {
+                    alert('Error getting citation: ' + data.message);
+                }
+            } catch (error) {
+                alert('Error getting citation: ' + error.message);
+            }
+        }
+
+        async function getSummary(paperId) {
+            if (!paperId || paperId.trim() === '') {
+                alert('Error: Invalid paper ID');
+                return;
+            }
+
+            // Show loading state
+            const loadingHtml = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;">
+                    <div style="background: white; padding: 30px; border-radius: 12px; text-align: center; min-width: 300px;">
+                        <div class="loading-spinner" style="margin: 0 auto 20px;"></div>
+                        <div>Generating summary...</div>
+                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 10px;">This may take a moment</div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', loadingHtml);
+
+            try {
+                console.log('Requesting summary for paper:', paperId);
+                
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+                const response = await fetch(`http://localhost:8000/summarize`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        paper_id: paperId,
+                        method: 'abstractive'
+                    }),
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log('Summary response:', data);
+                
+                // Remove loading
+                document.querySelector('[style*="position: fixed"]').remove();
+                
+                if (data.success && data.data && data.data.summary) {
+                    showSummaryModal(data.data);
+                } else {
+                    alert('Error getting summary: ' + (data.message || 'No summary returned'));
+                }
+            } catch (error) {
+                console.error('Summary error:', error);
+                // Remove loading
+                const loadingEl = document.querySelector('[style*="position: fixed"]');
+                if (loadingEl) loadingEl.remove();
+                
+                if (error.name === 'AbortError') {
+                    alert('Summary request timed out. Please try again.');
+                } else {
+                    alert('Error getting summary: ' + error.message);
+                }
+            }
+        }
+
+        function showSummaryModal(summaryData) {
+            const modal = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;" onclick="this.remove()">
+                    <div style="background: white; padding: 30px; border-radius: 12px; max-width: 800px; max-height: 80vh; overflow-y: auto; margin: 20px;" onclick="event.stopPropagation()">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3 style="margin: 0; color: #1f2937;">Paper Summary</h3>
+                            <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #9ca3af;">&times;</button>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="color: #374151; margin-bottom: 10px;">Summary</h4>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; line-height: 1.6;">${summaryData.summary}</div>
+                        </div>
+                        
+                        ${summaryData.key_points && summaryData.key_points.length > 0 ? `
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="color: #374151; margin-bottom: 10px;">Key Points</h4>
+                            <ul style="padding-left: 20px; color: #4b5563;">
+                                ${summaryData.key_points.map(point => `<li style="margin-bottom: 8px;">${point}</li>`).join('')}
+                            </ul>
+                        </div>
+                        ` : ''}
+                        
+                        <div style="display: flex; gap: 20px; font-size: 0.9rem; color: #6b7280; border-top: 1px solid #e5e7eb; padding-top: 15px;">
+                            <div><strong>Method:</strong> ${summaryData.method}</div>
+                            <div><strong>Compression:</strong> ${(summaryData.compression_ratio * 100).toFixed(1)}%</div>
+                            <div><strong>Confidence:</strong> ${(summaryData.confidence_score * 100).toFixed(1)}%</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modal);
+        }
+
+        function findSimilar(title) {
+            document.getElementById('searchQuery').value = title;
+            searchPapers();
+        }
+
+        // Allow Enter key to search and chat
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchQuery').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchPapers();
+                }
+            });
+            
+            document.getElementById('chatInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

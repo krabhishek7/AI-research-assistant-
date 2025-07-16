@@ -1,169 +1,178 @@
-# Academic Research Assistant 🤖
+# Academic Research Assistant
 
-An intelligent chatbot designed to streamline academic research by leveraging Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG). This tool helps researchers discover, summarize, compare, and cite academic papers from major scientific databases.
+A comprehensive AI-powered research assistant that helps academics and researchers discover, analyze, and manage scientific literature from multiple sources including ArXiv, PubMed, and Google Scholar.
 
-The system integrates with ArXiv, PubMed, and Google Scholar to fetch papers, processes them into a searchable vector database using ChromaDB, and provides an interactive Gradio interface for a seamless user experience.
+## Features
 
------
+- **Multi-source Search**: Search across ArXiv, PubMed, and Google Scholar
+- **Semantic Search**: AI-powered semantic search using scientific paper embeddings
+- **Paper Summarization**: Automatic summarization of research papers
+- **Citation Generation**: Generate citations in multiple formats (APA, MLA, Chicago, BibTeX)
+- **Research Management**: Organize papers into research projects
+- **Related Work Discovery**: Find related papers and recommendations
+- **Export Functionality**: Export summaries, citations, and reading lists
 
-## ✨ Features
-
-  * **📚 Multi-Source Paper Search**: Simultaneously search for papers across ArXiv, PubMed, and Google Scholar by keyword, author, or topic.
-  * **🔍 Advanced Semantic Search**: Go beyond keywords. Find conceptually similar papers using sentence-transformer embeddings (`allenai/specter`). Includes re-ranking with cross-encoders for higher accuracy.
-  * **📝 AI-Powered Summarization**: Generate concise abstractive and extractive summaries of papers using Hugging Face models (BART, T5). Extract key points like methodology, results, and limitations.
-  * **🧠 Intelligent Q\&A with LlamaIndex**: Ask complex questions across a collection of papers. The system uses LlamaIndex query engines to synthesize answers from multiple sources.
-  * **✍️ Automatic Citation Generation**: Instantly generate citations for papers in various formats, including APA, MLA, Chicago, and BibTeX.
-  * **📊 Comparative Analysis**: Select multiple papers and generate a side-by-side comparison of their key findings, methodologies, and conclusions.
-  * **🌐 Knowledge Graph Visualization**: Understand the relationships between papers, authors, and concepts through a visualized knowledge graph.
-  * **🖥️ Interactive Gradio UI**: A user-friendly interface with dedicated tabs for searching, summarizing, managing a personal library, and generating citations.
-
------
-
-## 🛠️ Technology Stack
-
-  * **Backend**: FastAPI
-  * **Frontend**: Gradio
-  * **Vector Database**: ChromaDB
-  * **AI/NLP Frameworks**: LlamaIndex, Hugging Face (Transformers, Sentence-Transformers)
-  * **Data Sources**: ArXiv API, PubMed API, Google Scholar Scraper
-  * **PDF Processing**: `pdfplumber`
-  * **Language**: Python 3.9+
-
------
-
-## 📂 Project Structure
+## Project Structure
 
 ```
 academic-research-assistant/
 ├── backend/
-│   ├── api/
-│   │   └── main.py         # FastAPI endpoints
-│   ├── data_sources/
-│   │   ├── arxiv_client.py   # ArXiv API integration
-│   │   ├── pubmed_client.py  # PubMed API integration
-│   │   └── scholar_client.py # Google Scholar scraper
-│   ├── database/
-│   │   ├── chromadb_client.py # ChromaDB vector store operations
-│   │   └── models.py        # Data models for papers
-│   ├── processing/
-│   │   ├── paper_processor.py # Extract and clean paper content
-│   │   ├── embeddings.py      # Generate embeddings using Hugging Face
-│   │   └── summarizer.py      # Paper summarization logic
-│   └── services/
-│       ├── search_service.py    # Semantic search implementation
-│       ├── citation_service.py  # Citation formatting
-│       └── recommendation.py  # Related paper suggestions
+│   ├── data_sources/          # API clients for different sources
+│   ├── processing/            # Text processing and AI models
+│   ├── database/             # Vector database and data models
+│   ├── services/             # Business logic services
+│   └── api/                  # FastAPI endpoints
 ├── frontend/
-│   └── app.py              # Gradio interface
+│   └── app.py               # Gradio interface
 ├── config/
-│   └── settings.py         # Configuration management
-├── .env.example            # Environment variable template
-└── requirements.txt        # Python dependencies
+│   └── settings.py          # Configuration management
+├── requirements.txt
+├── .env.example
+└── README.md
 ```
 
------
+## Installation
 
-## 🚀 Getting Started
+1. **Clone the repository**:
+```bash
+git clone <repository-url>
+cd academic-research-assistant
+```
 
-### 1\. Prerequisites
+2. **Create a virtual environment**:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-  * Python 3.9+
-  * Git
+3. **Install dependencies**:
+```bash
+pip install -r requirements.txt
+```
 
-### 2\. Installation
+4. **Set up environment variables**:
+```bash
+cp .env.example .env
+# Edit .env with your API keys and configuration
+```
 
-1.  **Clone the repository:**
+5. **Install additional dependencies** (if needed):
+```bash
+# For PDF processing
+pip install poppler-utils  # Linux/Mac
+# For Windows, download poppler binaries
+```
 
-    ```bash
-    git clone https://github.com/your-username/academic-research-assistant.git
-    cd academic-research-assistant
-    ```
+## Configuration
 
-2.  **Create and activate a virtual environment:**
+### Environment Variables
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
+Create a `.env` file based on `.env.example`:
 
-3.  **Install the required dependencies:**
+- `OPENAI_API_KEY`: OpenAI API key for advanced features
+- `HUGGINGFACE_TOKEN`: Hugging Face token for model access
+- `PUBMED_API_KEY`: PubMed API key (optional, for higher rate limits)
+- `CHROMA_PERSIST_DIRECTORY`: Directory for vector database storage
+- `ARXIV_MAX_RESULTS`: Maximum results from ArXiv API
+- `EMBEDDING_MODEL`: Model for generating embeddings
+- `SUMMARIZATION_MODEL`: Model for text summarization
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+### API Keys Setup
 
-4.  **Set up environment variables:**
-    Create a `.env` file in the root directory by copying the example file:
+1. **Hugging Face**: Get your token from [Hugging Face](https://huggingface.co/settings/tokens)
+2. **OpenAI**: Get your API key from [OpenAI](https://platform.openai.com/api-keys)
+3. **PubMed**: Register at [NCBI](https://www.ncbi.nlm.nih.gov/books/NBK25497/)
 
-    ```bash
-    cp .env.example .env
-    ```
+## Usage
 
-    Now, edit the `.env` file and add your API keys and configuration settings.
+### Starting the Application
 
-### 3\. Running the Application
+1. **Start the backend API**:
+```bash
+cd backend
+python api/main.py
+```
 
-1.  **Start the Backend API (FastAPI):**
-    Open a terminal and run:
+2. **Start the frontend interface**:
+```bash
+cd frontend
+python app.py
+```
 
-    ```bash
-    uvicorn backend.api.main:app --host 0.0.0.0 --port 8000 --reload
-    ```
+3. **Access the application**:
+   - API: http://localhost:8000
+   - Frontend: http://localhost:7860
 
-    The API will be available at `http://localhost:8000/docs`.
+### API Endpoints
 
-2.  **Launch the Frontend UI (Gradio):**
-    Open a second terminal and run:
+- `POST /search`: Search papers across all sources
+- `POST /summarize`: Summarize a single paper
+- `POST /related`: Find related papers
+- `POST /citations/generate`: Generate citations
+- `GET /papers/{id}`: Get paper details
+- `POST /papers/compare`: Compare multiple papers
 
-    ```bash
-    python frontend/app.py
-    ```
+### Example API Usage
 
-    The user interface will be accessible at `http://127.0.0.1:7860`.
+```python
+import requests
 
------
+# Search for papers
+response = requests.post("http://localhost:8000/search", json={
+    "query": "machine learning in healthcare",
+    "max_results": 10,
+    "sources": ["arxiv", "pubmed"]
+})
 
-## ⚙️ Configuration
+papers = response.json()["data"]["papers"]
+```
 
-The following environment variables must be set in your `.env` file:
+## Development
 
-| Variable                  | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `OPENAI_API_KEY`          | Optional. Your API key for OpenAI models.              |
-| `HUGGINGFACE_TOKEN`       | Your Hugging Face Hub token for accessing private models. |
-| `CHROMA_PERSIST_DIRECTORY`| Path to the directory for persisting the ChromaDB database. Default: `./chroma_db` |
-| `ARXIV_MAX_RESULTS`       | Maximum number of results to fetch from ArXiv per query. Default: `100` |
-| `PUBMED_API_KEY`          | Optional. Your NCBI API key for PubMed access.         |
+### Running Tests
 
------
+```bash
+pytest tests/
+```
 
-## Endpoints API
+### Code Formatting
 
-The backend provides the following RESTful API endpoints:
+```bash
+black .
+isort .
+```
 
-| Method | Endpoint              | Description                                        |
-| :----- | :-------------------- | :------------------------------------------------- |
-| `POST` | `/search`             | Searches for papers across all integrated sources. |
-| `POST` | `/summarize`          | Generates a summary for a single paper via URL/ID. |
-| `POST` | `/related`            | Finds and returns papers related to a given paper. |
-| `POST` | `/citations/generate` | Generates a citation for a paper in a specific style. |
-| `GET`  | `/papers/{id}`        | Retrieves detailed information for a specific paper. |
-| `POST` | `/papers/compare`     | Compares two or more papers side-by-side.        |
+### Adding New Data Sources
 
------
+1. Create a new client in `backend/data_sources/`
+2. Implement the standard interface returning `Paper` objects
+3. Update the search service to include the new source
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome\! If you'd like to contribute, please fork the repository and create a pull request. You can also open an issue with the "enhancement" tag to suggest new features.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
 
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+## License
 
------
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📜 License
+## Support
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+For issues and questions, please open an issue on the GitHub repository.
+
+## Roadmap
+
+- [ ] Phase 1: Basic ArXiv integration ✅
+- [ ] Phase 2: Vector database and semantic search
+- [ ] Phase 3: Paper summarization
+- [ ] Phase 4: Citation generation
+- [ ] Phase 5: PubMed integration
+- [ ] Phase 6: Google Scholar integration
+- [ ] Phase 7: Advanced features (recommendations, exports)
+- [ ] Phase 8: Research timeline visualization
+- [ ] Phase 9: Collaborative features
+- [ ] Phase 10: Mobile app 
